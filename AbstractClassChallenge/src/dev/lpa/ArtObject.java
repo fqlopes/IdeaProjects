@@ -13,4 +13,9 @@ public class ArtObject extends ProductForSale{
         System.out.printf("The price of the piece is $%6.2f %n", price);
         System.out.println(description);
     }
+
+    //Why would you do this
+    public void nothing (){
+        nothing();
+    }
 }
