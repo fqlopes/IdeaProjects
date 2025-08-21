@@ -1,0 +1,136 @@
+public abstract class ListItem {
+    protected ListItem rightLink;
+    protected ListItem leftLink;
+    protected Object value;
+
+    public ListItem(Object value) {
+        this.value = value;
+    }
+
+    abstract ListItem next();
+
+    abstract ListItem setNext(ListItem rightLink);
+
+    abstract ListItem previous();
+
+    abstract ListItem setPrevious(ListItem leftLink);
+
+    abstract int compareTo(ListItem other);
+
+    public Object getValue() {
+        return value;
+    }
+
+    public void setValue(Object value) {
+        this.value = value;
+    }
+}
+
+public class Node extends ListItem {
+    public Node(Object value) {
+        super(value);
+    }
+
+    @Override
+    ListItem next() {
+        return rightLink;
+    }
+
+    @Override
+    ListItem setNext(ListItem rightLink) {
+        return this.rightLink = rightLink;
+    }
+
+    @Override
+    ListItem previous() {
+        return leftLink;
+    }
+
+    @Override
+    ListItem setPrevious(ListItem leftLink) {
+        return this.leftLink = leftLink;
+    }
+
+    /* If this value is greater than the value that was passed in, then it
+    should return a number greater than zero. If vice versa, then it
+    should return a number less than zero, and zero if equal. */
+    @Override
+    int compareTo(ListItem other) {
+        int x = Integer.parseInt(String.valueOf(value));
+        int y = Integer.parseInt(String.valueOf(other.value));
+        if (x == y) {
+            return 0;
+        }
+        return x > y ? 1 : -1;
+    }
+}
+
+public class MyLinkedList implements NodeList {
+    private ListItem root;
+
+    public MyLinkedList(ListItem root) {
+        this.root = root;
+    }
+
+    @Override
+    public ListItem getRoot() {
+        return root;
+    }
+
+    @Override
+    public boolean addItem(ListItem node) {
+        // the list is empty so the item becomes the head of the list
+        if (root == null) {
+            root = node;
+            return true;
+        }
+
+        ListItem current = root;
+        while (true) {
+            // if there is no next item, we insert this item at the end of the list
+            if (current.next() == null) {
+                current.setNext(node);
+                node.setPrevious(current);
+                return true;
+            }
+            // if there is a next item and new item is smaller, insert this item before current
+            if (current.compareTo(node) == 1) {
+                root = node;
+                root.setNext(current);
+                current.setPrevious(root);
+                return true;
+            }
+            return false;
+        }
+    }
+
+    @Override
+    public boolean removeItem(ListItem node) {
+        if (root == null || node == null) {
+            return false;
+        }
+        while (true) {
+            if (node.compareTo(root) == 0) {
+                root.previous().setNext(null);
+                return true;
+            }
+
+            root = root.next();
+            if (root == null) {
+                return false;
+            }
+        }
+    }
+
+    @Override
+    public void traverse(ListItem root) {
+        if (root == null) {
+            System.out.print("The list is empty");
+        }
+        while (root != null) {
+            System.out.println(root.getValue());
+            root = root.next();
+        }
+    }
+}
+

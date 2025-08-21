@@ -1,0 +1,40 @@
+- You'll be using the following terminal operations:
+
+    RETURN TYPE         - TERMINAL OPERATION
+    long                - count()
+    DoubleStatistics    - summaryStatistics()
+    boolean             - allMatch
+    boolean             - anyMatch
+    boolean             - noneMatch
+
+- You'll be using the operations to answer questions about a series of students
+This code has a factory method, to generate a new instance of a Student, using random
+data.
+- This factory method will also generate some random activity, for each course passed as an
+argument, to the Student constructor.
+
+####CHALLENGE####
+
+- Create a source for a stream of Students.
+- Use the static method on Student as the Supplier.
+- Use a large enough number to get a variety of Student data (no less than 1000).
+- Use a combination of the intermediate and terminal operations we've covered so far, to
+answer the following questions:
+
+    - How many male and female students are in the group.
+
+    - How many students fall into the three ages ranges:
+        - Less than age 30
+        - Between 30 and 60
+        - Over 60 years old
+
+- Use summaryStatistics on the student's age, to get a better idea of how old the student
+population is
+
+    - What countries are the students from? Print a distinct list of the country codes.
+
+    - Are there students that are still active and have been enrolled for more than 7 years?
+
+- Use one of the match terminal operations to answer this question.
+- Select 5 of the students above and print their information out.
+

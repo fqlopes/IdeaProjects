@@ -1,0 +1,16 @@
+In a new class called MainChallenge, with a main method:
+
+- Copy the two courses, jmc and pymc, passing both
+an additional argument for the lecture count. 100 and 50
+
+- Add a third course, no lecture count needed
+
+- Use stream.generate or iterate to generate 5k students and create
+a list of these
+
+- Use getPercentComplete method, to calculate the average percent completed
+for all students just for jmc, using the reduce terminal operation
+
+- Use this result, multiplying by 1.25, to collect a group of students(either as a list,
+or a set). These would be the students who've completed more than three quarters of that
+average percentage.

@@ -1,0 +1,5 @@
+# This directory is a Syncthing folder marker.
+# Do not delete.
+
+folderID: ri2sc-jkieq
+created: 2025-06-30T12:54:19-03:00
