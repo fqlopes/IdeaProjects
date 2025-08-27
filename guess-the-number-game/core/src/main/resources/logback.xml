@@ -8,7 +8,7 @@
     <logger name="academy.learnprogramming" level="TRACE"/>
     <logger name="org.springframework" level="TRACE"/>
 
-    <root level="INFO">
+    <root level="TRACE">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

@@ -3,21 +3,31 @@ package academy.learnprogramming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-
+@Component
 public class GameImpl implements Game {
 
     // == constants ==
     private static final Logger logger = LoggerFactory.getLogger(GameImpl.class);
 
-    // == fields ==
+    // == constructor ==
+
     @Autowired
-    private NumberGenerator numberGenerator;
-    private int guessCount = 10;
+    public GameImpl(NumberGenerator numberGenerator,@GuessCount int guessCount) {
+        this.numberGenerator = numberGenerator;
+        this.guessCount = guessCount;
+    }
+
+    // == fields ==
+    private final NumberGenerator numberGenerator;
+
+    private final int guessCount;
+
     private int number;
     private int guess;
     private int smallest;
@@ -29,8 +39,8 @@ public class GameImpl implements Game {
     @PostConstruct
     @Override
     public void reset() {
-        smallest = 0;
-        guess = 0;
+        smallest = numberGenerator.getMinNumber();
+        guess = numberGenerator.getMinNumber();
         remainingGuesses = guessCount;
         biggest = numberGenerator.getMaxNumber();
         number = numberGenerator.next();
@@ -76,6 +86,11 @@ public class GameImpl implements Game {
     }
 
     @Override
+    public int getGuessCount() {
+        return guessCount;
+    }
+
+    @Override
     public void check() {
         checkValidNumberRange();
 
@@ -83,12 +98,10 @@ public class GameImpl implements Game {
             if(guess > number) {
                 biggest = guess -1;
             }
-
             if(guess < number) {
                 smallest = guess + 1;
             }
         }
-
         remainingGuesses--;
     }
 
