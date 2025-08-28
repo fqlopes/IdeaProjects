@@ -1,20 +1,16 @@
 package academy.learnprogramming;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
+@Slf4j
 @Component
 public class MessageGeneratorImpl implements  MessageGenerator{
 
-    //Logger & constant fields
-    private static final Logger log = LoggerFactory.getLogger(MessageGeneratorImpl.class);
-
-    //Autowiring the fields
-
+    // == fields ==
     private final Game game;
 
     @Autowired
@@ -51,10 +47,7 @@ public class MessageGeneratorImpl implements  MessageGenerator{
             if(game.getGuess() < game.getNumber()) {
                 direction = "Higher";
             }
-
             return direction + "! You have " + game.getRemainingGuesses() + " guesses left";
         }
     }
-
-
 }
