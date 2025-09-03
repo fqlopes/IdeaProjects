@@ -1,0 +1,47 @@
+package academy.learnprogramming.config;
+
+
+import academy.learnprogramming.util.ViewNames;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
+
+@EnableWebMvc
+@Configuration
+@ComponentScan (basePackages = "academy.learnprogramming")
+public class WebConfig implements WebMvcConfigurer {
+
+
+    // == constants ==
+    private static final String RESOLVER_PREFIX = "/WEB-INF/view/";
+    private static final String RESOLVER_SUFFIX = ".jsp";
+
+    // == bean methods ==
+    @Bean
+    public ViewResolver viewResolver () {
+        //creating an internal resource ViewResolver
+        UrlBasedViewResolver viewResolver = new InternalResourceViewResolver();
+        viewResolver.setPrefix(RESOLVER_PREFIX);
+        viewResolver.setSuffix(RESOLVER_SUFFIX);
+        return viewResolver;
+    }
+
+
+    //addViewControllers is used to configure simple automted controllers,
+    //that are pre-configured with a response status code, or a view
+    //to render the response body
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        //We configure the path to the home view and spring will use without the need to create a controller
+        //It assists with the registration of simple automated controllers that are pre-configured with a
+        //status code or a view -> HOME (view)
+        registry.addViewController("/").setViewName(ViewNames.HOME); //Our view controller
+
+    }
+}

@@ -1,6 +1,8 @@
-package academy.learnprogramming;
+package academy.learnprogramming.console;
 
 
+import academy.learnprogramming.Game;
+import academy.learnprogramming.MessageGenerator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.EventListener;
