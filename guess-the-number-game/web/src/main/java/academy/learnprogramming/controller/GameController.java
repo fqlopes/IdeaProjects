@@ -34,6 +34,7 @@ public class GameController {
         log.info("LOG: model= {}",model);
 
         if (gameService.isGameOver()){
+
             return ViewNames.GAME_OVER;
         }
 
